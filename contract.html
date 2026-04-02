@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Maintenance Contract | Mzuri Organics x Marubi Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Clash+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            color: #e8e8e8;
+        }
+
+        .contract-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #242323 0%, #1a1a1a 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(204, 47, 1, 0.2);
+        }
+
+        .contract-header {
+            background: linear-gradient(135deg, #1a3c07 0%, #242323 100%);
+            padding: 30px 40px;
+            position: relative;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .brand-left h2 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #88c431;
+            margin-bottom: 5px;
+        }
+
+        .brand-left p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .brand-right h2 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #cc2f01;
+            margin-bottom: 5px;
+        }
+
+        .brand-right p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .contract-title {
+            text-align: center;
+            margin: 20px 0 15px;
+        }
+
+        .contract-title h1 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #88c431, #cc2f01);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .contract-title p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+
+        .date-box {
+            text-align: right;
+            padding: 12px 0;
+            border-top: 1px solid rgba(204, 47, 1, 0.2);
+            margin-top: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contract-content {
+            padding: 30px 40px;
+        }
+
+        .party-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(204, 47, 1, 0.2);
+        }
+
+        .party-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(204, 47, 1, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .party-card h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #88c431;
+        }
+
+        .party-card .client-title {
+            color: #cc2f01;
+        }
+
+        .party-detail {
+            margin: 10px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            padding-left: 5px;
+        }
+
+        .website-badge {
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(136, 196, 49, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            border: 1px solid rgba(136, 196, 49, 0.2);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(204, 47, 1, 0.3);
+            color: #cc2f01;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(136, 196, 49, 0.15);
+        }
+
+        .service-check {
+            color: #88c431;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        .service-freq {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .pricing-table {
+            width: 100%;
+            min-width: 500px;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid rgba(204, 47, 1, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .pricing-table th {
+            background: rgba(204, 47, 1, 0.1);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+        }
+
+        .pricing-table td:first-child {
+            font-weight: 600;
+            background: rgba(136, 196, 49, 0.05);
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #cc2f01;
+        }
+
+        .price small {
+            font-size: 0.6rem;
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .plan-selection {
+            background: rgba(136, 196, 49, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .plan-selection p {
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .plan-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .plan-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+
+        .plan-option input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #cc2f01;
+        }
+
+        .exclusions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .exclusion-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 40px;
+            border: 1px solid rgba(204, 47, 1, 0.2);
+            font-size: 0.8rem;
+        }
+
+        .exclusion-cross {
+            color: #cc2f01;
+            font-weight: bold;
+        }
+
+        .rate {
+            color: #88c431;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .sla-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .sla-table th,
+        .sla-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+        }
+
+        .sla-table th {
+            color: #88c431;
+            font-weight: 600;
+        }
+
+        .priority-critical { color: #cc2f01; font-weight: 600; }
+        .priority-high { color: #e64d2e; }
+        .priority-normal { color: #88c431; }
+        .priority-low { color: rgba(255, 255, 255, 0.5); }
+
+        .payment-terms {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        .payment-terms p {
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 180px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .payment-method h4 {
+            font-size: 0.8rem;
+            color: #88c431;
+            margin-bottom: 6px;
+        }
+
+        .payment-method p {
+            font-size: 0.75rem;
+            word-break: break-word;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(204, 47, 1, 0.3);
+        }
+
+        .signature-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .signature-box h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #88c431;
+        }
+
+        .signature-box .dev-title {
+            color: #cc2f01;
+        }
+
+        .signature-line {
+            margin: 15px 0;
+            padding: 12px 0;
+            border-bottom: 2px dashed rgba(204, 47, 1, 0.5);
+            font-family: 'JetBrains Mono', monospace;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        .signature-input, .date-input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(204, 47, 1, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .date-input {
+            border-color: rgba(136, 196, 49, 0.3);
+        }
+
+        .signature-input:focus, .date-input:focus {
+            outline: none;
+            border-color: #cc2f01;
+        }
+
+        .contract-footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(204, 47, 1, 0.2);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 15px 0;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #cc2f01, #e64d2e);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(204, 47, 1, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message Popup */
+        .success-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #88c431;
+            color: #1a1a1a;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            text-align: center;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .success-message.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .success-message.error {
+            background: #cc2f01;
+            color: white;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; padding: 0; margin: 0; color: black; }
+            .contract-container { box-shadow: none; border: 1px solid #ccc; background: white; border-radius: 0; }
+            .contract-header { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .brand-left h2, .brand-right h2, .contract-title h1 { color: black !important; background: none !important; -webkit-text-fill-color: black !important; }
+            .brand-left p, .brand-right p, .contract-title p, .date-box { color: #555 !important; }
+            .party-card, .service-item, .plan-selection, .payment-terms, .signature-box { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
+            .section-title { color: black !important; border-bottom-color: #ccc !important; }
+            .price { color: black !important; }
+            .priority-critical, .priority-high, .priority-normal, .priority-low { color: black !important; }
+            .action-buttons { display: none !important; }
+            .btn { display: none !important; }
+            .contract-footer { background: #f5f5f5 !important; color: #555 !important; }
+            .signature-input, .date-input { border: 1px solid #ccc !important; background: white !important; color: black !important; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .contract-header { padding: 20px; }
+            .contract-content { padding: 20px; }
+            .header-top { flex-direction: column; text-align: center; gap: 15px; }
+            .brand-left, .brand-right { text-align: center; }
+            .brand-left h2, .brand-right h2 { font-size: 1.3rem; }
+            .contract-title h1 { font-size: 1.4rem; }
+            .party-grid { grid-template-columns: 1fr; gap: 15px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.1rem; }
+            .signature-section { grid-template-columns: 1fr; gap: 20px; }
+            .payment-detail { flex-direction: column; }
+            .date-box { text-align: center; }
+            .btn { padding: 12px 24px; font-size: 0.9rem; width: 100%; max-width: 280px; justify-content: center; }
+            .action-buttons { justify-content: center; }
+            .success-message { font-size: 0.85rem; padding: 12px 20px; min-width: 250px; }
+        }
+
+        @media (max-width: 480px) {
+            .brand-left h2, .brand-right h2 { font-size: 1.1rem; }
+            .contract-title h1 { font-size: 1.2rem; }
+            .section-title { font-size: 1rem; }
+            .btn { padding: 10px 20px; font-size: 0.85rem; max-width: 260px; }
+            .success-message { font-size: 0.75rem; padding: 10px 16px; min-width: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="contract-container" id="contract">
+    <div class="contract-header">
+        <div class="header-top">
+            <div class="brand-left">
+                <h2>Mzuri Organics</h2>
+                <p>◆ Regenerating Kenyan Agriculture</p>
+            </div>
+            <div class="brand-right">
+                <h2>Marubi Labs</h2>
+                <p>◆ Built for Greatness</p>
+            </div>
+        </div>
+        
+        <div class="contract-title">
+            <h1>Website Maintenance Agreement</h1>
+            <p> Partnership for Growth & Stability ◈</p>
+        </div>
+        
+        <div class="date-box">
+            Effective Date: <strong id="displayDate"></strong>
+        </div>
+    </div>
+    
+    <div class="contract-content">
+        <!-- Party Information -->
+        <div class="party-grid">
+            <div class="party-card">
+                <h3> The Client</h3>
+                <div class="party-detail"> Mzuri Organics</div>
+                <div class="party-detail"> +254 701 934 918</div>
+                <div class="party-detail"> info@mzuriorganics.co.ke</div>
+                <div class="website-badge"> mzuriorganics.co.ke</div>
+            </div>
+            
+            <div class="party-card">
+                <h3 class="client-title"> The Developer</h3>
+                <div class="party-detail"> Marubi Labs</div>
+                <div class="party-detail"> CEO: Felix Marubi</div>
+                <div class="party-detail"> felixmarubi2005@gmail.com</div>
+                <div class="website-badge"> marubi-labs.vercel.app</div>
+            </div>
+        </div>
+        
+        <!-- Included Services -->
+        <div class="section">
+            <div class="section-title">✓ Included Services</div>
+            <div class="services-grid">
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Uptime Monitoring</div><div class="service-freq">Daily</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Security Updates</div><div class="service-freq">As needed</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Backups</div><div class="service-freq">Weekly (30-day retention)</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Bug Fixes</div><div class="service-freq">Under 1 hour included</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Performance Optimization</div><div class="service-freq">Monthly</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Form Testing</div><div class="service-freq">Weekly</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Broken Link Checks</div><div class="service-freq">Monthly</div></div></div>
+                <div class="service-item"><span class="service-check">✓</span><div class="service-info"><div class="service-name">Email Support</div><div class="service-freq">24-hour response</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Pricing Plans -->
+        <div class="section">
+            <div class="section-title"> Pricing Plans</div>
+            
+            <div class="table-wrapper">
+                <table class="pricing-table">
+                    <thead><tr><th>Package</th><th>Basic</th><th>Standard</th><th>Premium</th><th>Hourly</th></tr></thead>
+                    <tbody>
+                        <tr><td>Monthly Fee</td><td class="price">KSh 5,000</td><td class="price">KSh 8,000</td><td class="price">KSh 12,000</td><td class="price">KSh 1,800<small>/hr</small></td></tr>
+                        <tr><td>Included Hours</td><td>1 hour</td><td>2 hours</td><td>4 hours</td><td>Pay as you go</td></tr>
+                        <tr><td>Extra Hour</td><td>KSh 1,500</td><td>KSh 1,500</td><td>KSh 1,500</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="plan-selection">
+                <p> Select your plan:</p>
+                <div class="plan-options">
+                    <label class="plan-option"><input type="radio" name="plan" value="Basic (KSh 5,000/month)"> Basic (KSh 5,000)</label>
+                    <label class="plan-option"><input type="radio" name="plan" value="Standard (KSh 8,000/month)" checked> Standard (KSh 8,000) ★</label>
+                    <label class="plan-option"><input type="radio" name="plan" value="Premium (KSh 12,000/month)"> Premium (KSh 12,000)</label>
+                    <label class="plan-option"><input type="radio" name="plan" value="Hourly (KSh 1,800/hour)"> Hourly (KSh 1,800/hr)</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Exclusions -->
+        <div class="section">
+            <div class="section-title"> Exclusions (Additional Charges Apply)</div>
+            <div class="exclusions-list">
+                <div class="exclusion-item"><span class="exclusion-cross">✗</span> Content updates <span class="rate">KSh 1,500/hr</span></div>
+                <div class="exclusion-item"><span class="exclusion-cross">✗</span> New feature development <span class="rate">KSh 2,500/hr</span></div>
+                <div class="exclusion-item"><span class="exclusion-cross">✗</span> Major UI/UX redesign <span class="rate">Quoted separately</span></div>
+                <div class="exclusion-item"><span class="exclusion-cross">✗</span> SEO/content writing <span class="rate">KSh 1,000/page</span></div>
+                <div class="exclusion-item"><span class="exclusion-cross">✗</span> Emergency after-hours support <span class="rate">+50% fee</span></div>
+            </div>
+        </div>
+        
+        <!-- Response SLA -->
+        <div class="section">
+            <div class="section-title">⏱ Response SLA</div>
+            <table class="sla-table">
+                <thead><tr><th>Priority</th><th>Response Time</th><th>Resolution Target</th></tr></thead>
+                <tbody>
+                    <tr><td class="priority-critical">🔴 Critical</td><td>4 hours</td><td>24 hours</td></tr>
+                    <tr><td class="priority-high">🟠 High</td><td>8 hours</td><td>48 hours</td></tr>
+                    <tr><td class="priority-normal">🟡 Normal</td><td>24 hours</td><td>Up to 5 days</td></tr>
+                    <tr><td class="priority-low">🟢 Low</td><td>48 hours</td><td>Next cycle</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Payment Terms -->
+        <div class="section">
+            <div class="section-title"> Payment Terms</div>
+            <div class="payment-terms">
+                <p> Invoices are issued on the <strong>1st of each month</strong> and are due within <strong>7 days</strong>.</p>
+                <p> Late payments attract a <strong>10% monthly fee</strong>.</p>
+                <p> Either party may terminate this agreement with <strong>14 days written notice</strong>.</p>
+                
+                <div class="payment-detail">
+                    <div class="payment-method">
+                        <h4> M-Pesa</h4>
+                        <p>Number: <strong>+254712683708</strong><br>Account: <strong>FELIX MUGUCHE</strong></p>
+                    </div>
+                    <div class="payment-method">
+                        <h4> Bank Transfer</h4>
+                        <p>Bank: <strong>KCB Bank</strong><br>Account: <strong>To be provided</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Signatures -->
+        <div class="signature-section">
+            <div class="signature-box">
+                <h3> Mzuri Organics</h3>
+                <div class="signature-line"> Signature</div>
+                <input type="text" class="signature-input" id="clientSignature" placeholder="Type your full name as signature...">
+                <input type="text" class="date-input" id="clientDate" placeholder="Date (DD/MM/YYYY)">
+                <input type="text" class="signature-input" id="clientName" placeholder="Full Name">
+                <input type="email" class="signature-input" id="clientEmail" placeholder="Your Email Address">
+            </div>
+            
+            <div class="signature-box">
+                <h3 class="dev-title">⚡ Marubi Labs</h3>
+                <div class="signature-line"> Signature</div>
+                <input type="text" class="signature-input" id="devSignature" value="Felix Marubi">
+                <input type="text" class="date-input" id="devDate" placeholder="Date (DD/MM/YYYY)">
+                <input type="text" class="signature-input" id="devName" value="Felix Marubi, CEO">
+            </div>
+        </div>
+    </div>
+    
+    <div class="contract-footer">
+        <p> This agreement represents a partnership between Mzuri Organics and Marubi Labs </p>
+        <p style="margin-top: 5px;">For support:  felixmarubi2005@gmail.com |  +254 712 683 708</p>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="action-buttons">
+    <button class="btn" id="sendContractBtn">
+         Send Signed Contract
+    </button>
+</div>
+
+<div id="successMsg" class="success-message"></div>
+
+<script>
+    // Initialize EmailJS with your public key
+    emailjs.init("-vbqXtOV4fyJ0xFV_");
+    
+    // Set today's date
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('en-GB');
+    document.getElementById('displayDate').innerText = formattedDate;
+    document.getElementById('clientDate').value = formattedDate;
+    document.getElementById('devDate').value = formattedDate;
+    
+    function showMessage(msg, isError = false) {
+        const el = document.getElementById('successMsg');
+        el.innerHTML = msg;
+        el.classList.remove('error');
+        if (isError) el.classList.add('error');
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 5000);
+    }
+    
+    // Send contract via EmailJS
+    document.getElementById('sendContractBtn').addEventListener('click', async function() {
+        // Get all form data
+        const selectedPlan = document.querySelector('input[name="plan"]:checked')?.value || 'Not selected';
+        const clientSignature = document.getElementById('clientSignature').value.trim();
+        const clientName = document.getElementById('clientName').value.trim();
+        const clientEmail = document.getElementById('clientEmail').value.trim();
+        const clientDate = document.getElementById('clientDate').value;
+        const devSignature = document.getElementById('devSignature').value;
+        const devName = document.getElementById('devName').value;
+        const devDate = document.getElementById('devDate').value;
+        
+        // Validate required fields
+        if (!clientSignature) {
+            showMessage('❌ Please enter your signature', true);
+            document.getElementById('clientSignature').focus();
+            return;
+        }
+        
+        if (!clientName) {
+            showMessage('❌ Please enter your full name', true);
+            document.getElementById('clientName').focus();
+            return;
+        }
+        
+        if (!clientEmail) {
+            showMessage('❌ Please enter your email address', true);
+            document.getElementById('clientEmail').focus();
+            return;
+        }
+        
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(clientEmail)) {
+            showMessage('❌ Please enter a valid email address', true);
+            document.getElementById('clientEmail').focus();
+            return;
+        }
+        
+        // Prepare email content for the template
+        const emailParams = {
+            to_name: "Felix Marubi",
+            to_email: "felixmarubi2005@gmail.com",
+            from_name: clientName,
+            from_email: clientEmail,
+            client_name: clientName,
+            client_email: clientEmail,
+            client_signature: clientSignature,
+            client_date: clientDate,
+            selected_plan: selectedPlan,
+            dev_name: devName,
+            dev_signature: devSignature,
+            dev_date: devDate,
+            effective_date: formattedDate,
+            message: `
+📄 NEW CONTRACT SIGNED
+
+Client: ${clientName}
+Email: ${clientEmail}
+Plan: ${selectedPlan}
+Signed: ${clientDate}
+
+Developer: ${devName}
+Signed: ${devDate}
+
+Please review and confirm.
+            `
+        };
+        
+        // Show loading state
+        const btn = this;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '⏳ Sending Contract...';
+        btn.disabled = true;
+        
+        try {
+            // Send email using EmailJS
+            const result = await emailjs.send('service_o8la1lc', 'template_0nwi7yr', emailParams);
+            
+            if (result.status === 200) {
+                showMessage('✅ CONTRACT SENT SUCCESSFULLY! A copy has been sent to your email. We will review and get back to you within 24 hours.');
+                btn.innerHTML = '✓ Contract Sent!';
+                
+                // Save to localStorage
+                const data = {
+                    clientSignature, clientName, clientEmail, clientDate,
+                    devSignature, devName, devDate,
+                    selectedPlan,
+                    sentDate: new Date().toISOString()
+                };
+                localStorage.setItem('lastContractSent', JSON.stringify(data));
+                
+                // Optional: Clear form after successful send
+                // setTimeout(() => {
+                //     btn.innerHTML = originalText;
+                //     btn.disabled = false;
+                // }, 4000);
+            } else {
+                throw new Error('Send failed');
+            }
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            showMessage('❌ Failed to send contract. Please check your internet connection and try again. If problem persists, contact support at felixmarubi2005@gmail.com', true);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    });
+    
+    // Auto-save to localStorage
+    function autoSave() {
+        const data = {
+            clientSignature: document.getElementById('clientSignature').value,
+            clientName: document.getElementById('clientName').value,
+            clientEmail: document.getElementById('clientEmail').value,
+            clientDate: document.getElementById('clientDate').value,
+            devSignature: document.getElementById('devSignature').value,
+            devName: document.getElementById('devName').value,
+            devDate: document.getElementById('devDate').value,
+            selectedPlan: document.querySelector('input[name="plan"]:checked')?.value
+        };
+        localStorage.setItem('contractData', JSON.stringify(data));
+    }
+    
+    function loadSavedData() {
+        const saved = localStorage.getItem('contractData');
+        if (saved) {
+            const data = JSON.parse(saved);
+            if (data.clientSignature) document.getElementById('clientSignature').value = data.clientSignature;
+            if (data.clientName) document.getElementById('clientName').value = data.clientName;
+            if (data.clientEmail) document.getElementById('clientEmail').value = data.clientEmail;
+            if (data.clientDate) document.getElementById('clientDate').value = data.clientDate;
+            if (data.devSignature) document.getElementById('devSignature').value = data.devSignature;
+            if (data.devName) document.getElementById('devName').value = data.devName;
+            if (data.devDate) document.getElementById('devDate').value = data.devDate;
+            if (data.selectedPlan) {
+                const radio = document.querySelector(`input[value="${data.selectedPlan}"]`);
+                if (radio) radio.checked = true;
+            }
+        }
+    }
+    
+    const inputs = ['clientSignature', 'clientName', 'clientEmail', 'clientDate', 'devSignature', 'devName', 'devDate'];
+    inputs.forEach(id => document.getElementById(id).addEventListener('input', autoSave));
+    document.querySelectorAll('input[name="plan"]').forEach(radio => radio.addEventListener('change', autoSave));
+    
+    loadSavedData();
+</script>
+
+</body>
+</html>
